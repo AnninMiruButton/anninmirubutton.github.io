@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="KeyWords" content="杏仁ミル'ボタン'セリフ'杏仁'ミル'咪嚕'台詞'ボイス'語音'按鈕'Vtuber'虛擬Youtuber'バーチャルYoutuber">
+    <meta name="Description" content="只要按下按鈕就會播放杏仁ミル的語音，快來沉浸在台V最可愛的小girl的天籟之下吧！">
+    <meta name="Author" content="知和">
+    <meta name="Generator" content="MicrosoftVisualStudio2019">
+    <link rev="made" href="https://twitter.com/Azure_Mine">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="./howler.js"></script>
+
+    <title>杏仁ミルボタン</title>
+</head>
+<body>
+    <style>
+        body {
+            background-color : #ffefd5;
+        }
+
+        .voice {
+            display: inline-block;
+            margin: 0.4em 0.9em 0.4em 0;
+        }
+    </style>
+    <div id="infoDiv">
+        <h1>工事中</h1>
+    </div>
+    <br />
+    <div id="voiceDiv">
+        <small>日文預定</small>
+        <br />
+        <div class="voice" v-for="(voice, index) in getJPVoiceItem">
+            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+        </div>
+        <br />
+        <small>中文預定</small>
+        <br />
+        <div class="voice" v-for="(voice, index) in getCNVoiceItem">
+            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+        </div>
+        <br />
+        <small>その他</small>
+        <br />
+        <div class="voice" v-for="(voice, index) in getORVoiceItem">
+            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+        </div>
+    </div>
+
+    <script src="./AnninMiruJS.js"></script>
+</body>
+</html>
