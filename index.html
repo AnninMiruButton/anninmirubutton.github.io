@@ -11,10 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script src="./howler.js"></script>
 
-    <title>杏仁ミルボタン</title>
+    <title>杏仁ミルボタン/杏仁ミル按鈕</title>
 </head>
 <body>
     <style>
+        @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+        @import url(//fonts.googleapis.com/earlyaccess/notosansjp.css);
         body {
             background-color : #ffefd5;
         }
@@ -23,31 +25,111 @@
             display: inline-block;
             margin: 0.4em 0.9em 0.4em 0;
         }
-    </style>
-    <div id="infoDiv">
-        <h1>工事中</h1>
-    </div>
-    <br />
-    <div id="voiceDiv">
-        <small>日文預定</small>
-        <br />
-        <div class="voice" v-for="(voice, index) in getJPVoiceItem">
-            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
-        </div>
-        <br />
-        <small>中文預定</small>
-        <br />
-        <div class="voice" v-for="(voice, index) in getCNVoiceItem">
-            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
-        </div>
-        <br />
-        <small>その他</small>
-        <br />
-        <div class="voice" v-for="(voice, index) in getORVoiceItem">
-            <button class="voiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
-        </div>
-    </div>
 
-    <script src="./AnninMiruJS.js"></script>
+        .CNfont {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .JPfont {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .JPvoiceButton {
+            position: relative;
+            cursor: pointer;
+            border: 3px solid #ffd259;
+            background-color: #ffefd5;
+            color: black;
+            font-weight: bold;
+            font-size: 1.1em;
+            font-family:'Noto Sans JP', sans-serif;
+            padding: 0.2em 1em;
+            border-radius: 0.7em;
+            transition: 0.5s;
+        }
+
+        .CNvoiceButton {
+            position: relative;
+            cursor: pointer;
+            border: 3px solid #ffd259;
+            background-color: #ffefd5;
+            color: black;
+            font-weight: bold;
+            font-size: 1.1em;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 0.2em 1em;
+            border-radius: 0.7em;
+            transition: 0.5s;
+        }
+
+        .ORvoiceButton {
+            position: relative;
+            cursor: pointer;
+            border: 3px solid #ffd259;
+            background-color: #ffefd5;
+            color: black;
+            font-weight: bold;
+            font-size: 1.1em;
+            font-family: 'Noto Sans JP', sans-serif;
+            padding: 0.2em 1em;
+            border-radius: 0.7em;
+            transition: 0.5s;
+        }
+
+        Button:active {
+            background-color: #ffce80;
+            border-color: #ffbb00;
+            color: #ffffff;
+            transition: 0s;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #333;
+            background-image: linear-gradient(to right, #ccc, #333, #ccc);
+        }
+
+    </style>
+    <div id="Base">
+        <div id="TitleDiv">
+            <h1 class="JPfont">杏仁ミルボタン/杏仁ミル按鈕　　Fanmadeヾ(≧▽≦*)o　　<small class="JPfont">--test version--</small></h1>
+        </div>
+        <div id="CNInfoDiv" class="CNfont">
+            外表看似小孩，●●卻過於常人的台日混血虛擬YouTuber杏仁ミル(<small><a href="https://www.youtube.com/channel/UCFahBR2wixu0xOex84bXFvg" target="_blank">YouTube</a>/<a href="https://twitter.com/AnninMirudayo" target="_blank">Twittwr</a></small>)按鈕網站姍姍來遲啦！
+            <br />
+            目前共有 {{JPvoiceList.length}} 個日文按鈕、 {{CNvoiceList.length}} 個中文按鈕、 {{ORvoiceList.length}} 個其他按鈕可享用(緩慢成長中)
+            <br />
+            沉浸在台V最可愛的小girl的天籟(?)之下吧！
+        </div>
+        <br />
+        <div id="JPInfoDiv" class="JPfont">
+            自称六歳、台湾と日本のハーフバーチャルYouTuber杏仁ミルちゃん(<small><a href="https://www.youtube.com/channel/UCFahBR2wixu0xOex84bXFvg" target="_blank">YouTube</a>/<a href="https://twitter.com/AnninMirudayo" target="_blank">Twittwr</a></small>)のボタンサイトだよ！
+            <br />
+            今{{JPvoiceList.length}} 個の日本語ボタン、 {{CNvoiceList.length}} 個の中国語ボタン、 {{ORvoiceList.length}} 個のその他ボタンがあります。（だんだん増えてゆく）
+            <br />
+            たくさん押せば運がよくなる噂が街に流れているらしいよ？
+        </div>
+        <hr />
+        <div id="voiceDiv">
+            <h2 class="JPfont">日本語ボタン</h2>
+            <div class="voice" v-for="(voice, index) in getJPVoiceItem">
+                <button class="JPvoiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+            </div>
+            <hr />
+            <h2 class="CNfont">中文按鈕</h2>
+            <div class="voice" v-for="(voice, index) in getCNVoiceItem">
+                <button class="CNvoiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+            </div>
+            <hr />
+            <h2 class="JPfont">Other Button</h2>
+            <div class="voice" v-for="(voice, index) in getORVoiceItem">
+                <button class="ORvoiceButton" v-on:click="playSound(voice)">{{voice.replace(/^.._.._\d+_\d+=(.+)\.m4a$/, "$1")}}</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="./AnninMiruButton.js"></script>
 </body>
 </html>
