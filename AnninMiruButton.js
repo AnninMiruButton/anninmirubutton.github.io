@@ -260,7 +260,7 @@ const func = new Vue({
         playSound: function (voice) {
             const audio = new Howl({
                 src: './voice/' + voice,
-                volume: 2.0
+                volume: 1.8
             })
             audio.play()
         },
